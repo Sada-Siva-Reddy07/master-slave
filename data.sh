@@ -1,13 +1,11 @@
-
 #!/bin/bash
-sudo yum -y update
-sudo yum -y install git 
-sudo yum -y install docker 
+sudo yum -y install git docker
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo chmod 666 /var/run/docker.sock
-sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo usermod -a -G docker ec2-user
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-git clone https://github.com/Sada-Siva-Reddy07/wordpress.git
-cd wordpress
+git clone https://github.com/Sada-Siva-Reddy07/wordpress.git /sada
+cd /sada
 docker-compose up -d
